@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    AudioSource audioSource;
     public bool player1 = true;
 
     [Header("Movement")]
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating(nameof(Shoot), fireRate, fireRate);
     }
 
@@ -38,6 +40,11 @@ public class Player : MonoBehaviour
 
         if(direction != Vector3.zero)
             transform.forward = direction;
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 
     void Shoot()
